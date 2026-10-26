@@ -1,0 +1,10 @@
+{
+  "name": "oh-no-im-low",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Oh No, I'm Low! — V0.1 桌面与固定界面分层初始版本",
+  "scripts": {
+    "dev": "node tools/serve.cjs",
+    "start": "node tools/serve.cjs"
+  }
+}

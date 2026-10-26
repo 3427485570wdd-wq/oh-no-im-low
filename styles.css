@@ -1,0 +1,144 @@
+:root {
+  color-scheme: dark;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  background: #31142f;
+  color: #ffe9f4;
+}
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; }
+body {
+  height: 100vh;
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 45%, #62264f, #281226 80%);
+}
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+}
+.project-name {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 750;
+  letter-spacing: .025em;
+}
+.version-badge {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border: 1px solid #aa598c;
+  border-radius: 99px;
+  background: #4c2145;
+  color: #ffd6ed;
+  font-size: 12px;
+}
+.stage-area {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+.stage {
+  position: relative;
+  flex: none;
+  width: 100%;
+  aspect-ratio: 1672 / 941;
+  overflow: hidden;
+  background: #6a3153;
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px #d56ab047, 0 16px 50px #10091280;
+  isolation: isolate;
+}
+.world-layer, .desktop-background, .food-layer, .ui-layer, .ui-layer > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.world-layer {
+  z-index: 0;
+  transform-origin: center;
+}
+.desktop-background {
+  display: block;
+  object-fit: fill;
+  pointer-events: none;
+}
+.food-layer { z-index: 1; }
+.food {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.food-art {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.food-shadow {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  height: 34%;
+  bottom: 15%;
+  border-radius: 50%;
+  background: #58324c2e;
+  filter: blur(2.2px);
+  pointer-events: none;
+}
+.food[data-standing="true"] .food-shadow {
+  left: 14%;
+  right: 14%;
+  height: 11%;
+  bottom: -2%;
+}
+.ui-layer {
+  z-index: 2;
+  pointer-events: none;
+}
+.ui-layer > img {
+  display: block;
+  user-select: none;
+}
+.loading-message {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80%;
+  margin: 0;
+  padding: 12px 20px;
+  border: 1px solid #d176ae;
+  border-radius: 14px;
+  background: #3a1839f2;
+  color: #ffedf5;
+  font-size: 14px;
+  text-align: center;
+}
+.loading-message[hidden] { display: none; }
+.project-footer {
+  padding: 11px 16px 13px;
+  color: #d6a4c2;
+  text-align: center;
+  font-size: 12px;
+}
+.no-script { position: fixed; bottom: 20px; width: 100%; text-align: center; }
+@media (max-width: 600px) {
+  .project-header { padding: 12px; gap: 8px; }
+  .project-name { font-size: 14px; }
+  .version-badge { padding: 5px 8px; font-size: 10px; }
+  .stage-area { padding: 0 8px; }
+  .stage { border-radius: 7px; }
+  .project-footer { font-size: 10px; padding: 10px 8px; }
+}

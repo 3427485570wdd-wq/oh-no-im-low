@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#31142f">
+  <meta name="description" content="Oh No, I'm Low! 低血糖互动游戏的 V0.1 桌面初始版本。">
+  <title>Oh No, I'm Low! · V0.1</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./src/scene-data.js" defer></script>
+  <script src="./src/app.js" defer></script>
+</head>
+<body>
+  <header class="project-header">
+    <p class="project-name">Oh No, I’m Low!</p>
+    <span class="version-badge">V0.1 · 桌面初始版</span>
+  </header>
+  <main class="stage-area" id="stage-area">
+    <section class="stage" id="game-stage" aria-label="低血糖互动游戏桌面">
+      <div class="world-layer" id="world-layer" data-layer="world">
+        <img class="desktop-background" src="./assets/desktop-background.png"
+          alt="摆满文具、饰品与日用品的粉紫色桌面" draggable="false">
+        <div class="food-layer" id="food-layer" aria-label="桌面上的七件食品"></div>
+      </div>
+      <div class="ui-layer" data-layer="fixed-ui">
+        <img src="./assets/ui/main-game-ui.svg" draggable="false"
+          alt="固定主界面：模拟状态条、暂停、重新校准、操作提示、补充记录与进食区">
+      </div>
+      <p class="loading-message" id="loading-message" role="status">正在加载桌面…</p>
+    </section>
+  </main>
+  <footer class="project-footer">桌面初始展示 · 本版尚未加入抓取与摄像头交互</footer>
+  <noscript><p class="no-script">请开启浏览器的 JavaScript，以显示独立食品与适配桌面。</p></noscript>
+</body>
+</html>

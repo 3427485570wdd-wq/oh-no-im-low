@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="435" height="377" viewBox="95 136 435 377" preserveAspectRatio="none" fill="none" role="img" aria-labelledby="asset-title asset-desc"><title id="asset-title">心形盒软糖 · F02</title><desc id="asset-desc">透明心形糖盒与可见彩色软糖；原生矢量分层，背景透明，整盒作为一个游戏物品。</desc><defs><linearGradient id="f02-base" x1="10%" y1="0%" x2="85%" y2="100%"><stop offset="0" stop-color="#ffc0ed"/><stop offset="0.5" stop-color="#d578d8"/><stop offset="1" stop-color="#9144ba"/></linearGradient><linearGradient id="f02-rim" x1="10%" y1="0%" x2="85%" y2="100%"><stop offset="0" stop-color="#fff0ff"/><stop offset="0.5" stop-color="#d59bfa"/><stop offset="1" stop-color="#a456cf"/></linearGradient><linearGradient id="f02-pink" x1="10%" y1="0%" x2="85%" y2="100%"><stop offset="0" stop-color="#ffd0e7"/><stop offset="0.5" stop-color="#ff7eb9"/><stop offset="1" stop-color="#eb3c91"/></linearGradient><linearGradient id="f02-yellow" x1="10%" y1="0%" x2="85%" y2="100%"><stop offset="0" stop-color="#fff6bc"/><stop offset="0.5" stop-color="#ffdb61"/><stop offset="1" stop-color="#efa634"/></linearGradient><linearGradient id="f02-purple" x1="10%" y1="0%" x2="85%" y2="100%"><stop offset="0" stop-color="#f1d6ff"/><stop offset="0.5" stop-color="#c18cf0"/><stop offset="1" stop-color="#9250d0"/></linearGradient><linearGradient id="f02-orange" x1="10%" y1="0%" x2="85%" y2="100%"><stop offset="0" stop-color="#ffe5a9"/><stop offset="0.5" stop-color="#ffad5c"/><stop offset="1" stop-color="#f17150"/></linearGradient><linearGradient id="f02-lid" x1="0%" y1="0%" x2="90%" y2="100%"><stop stop-color="#fff5ff" stop-opacity=".2"/><stop offset=".5" stop-color="#ddb5ff" stop-opacity=".05"/><stop offset="1" stop-color="#f5ceff" stop-opacity=".25"/></linearGradient><clipPath id="f02-inner"><path d="M320 494C290 472 107 371 111 258C115 155 241 141 320 228C399 141 525 155 529 258C533 371 350 472 320 494Z" transform="translate(320 325) scale(.91) translate(-320 -325)"/></clipPath></defs><g id="heart-gummy-box" data-food-id="F02" transform="translate(0 -12) rotate(-7 320 325)" stroke-linejoin="round" stroke-linecap="round">
+<g id="f02-box-base" inkscape:groupmode="layer" inkscape:label="01 心形盒底与厚度"><path d="M320 494C290 472 107 371 111 258C115 155 241 141 320 228C399 141 525 155 529 258C533 371 350 472 320 494Z" transform="translate(0 27)" fill="url(#f02-base)" stroke="#642455" stroke-width="5.5"/><path d="M121 293C150 391 283 484 320 508C366 479 492 386 519 294" stroke="#ffd0f0" stroke-width="5"/><path d="M320 494C290 472 107 371 111 258C115 155 241 141 320 228C399 141 525 155 529 258C533 371 350 472 320 494Z" fill="#b588de" fill-opacity=".3" stroke="#71316f" stroke-width="5"/></g>
+<g id="f02-gummies" inkscape:groupmode="layer" inkscape:label="02 盒内软糖"><g clip-path="url(#f02-inner)"><g id="f02-gummy-1" transform="translate(190 262) rotate(-16) scale(0.8)">
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" transform="translate(0 5)" fill="#a13a87" stroke="#713065" stroke-width="3.5"/>
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" fill="url(#f02-pink)" stroke="#9d3e80" stroke-width="3"/>
+<path d="M-25-17Q-24-29-13-29M11-28Q21-31 25-19" stroke="#fff8f1" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/>
+</g><g id="f02-gummy-2" transform="translate(267 264) rotate(18) scale(0.8)">
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" transform="translate(0 5)" fill="#a13a87" stroke="#713065" stroke-width="3.5"/>
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" fill="url(#f02-yellow)" stroke="#9d3e80" stroke-width="3"/>
+<path d="M-25-17Q-24-29-13-29M11-28Q21-31 25-19" stroke="#fff8f1" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/>
+</g><g id="f02-gummy-3" transform="translate(392 245) rotate(-12) scale(0.84)">
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" transform="translate(0 5)" fill="#a13a87" stroke="#713065" stroke-width="3.5"/>
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" fill="url(#f02-purple)" stroke="#9d3e80" stroke-width="3"/>
+<path d="M-25-17Q-24-29-13-29M11-28Q21-31 25-19" stroke="#fff8f1" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/>
+</g><g id="f02-gummy-4" transform="translate(459 289) rotate(18) scale(0.75)">
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" transform="translate(0 5)" fill="#a13a87" stroke="#713065" stroke-width="3.5"/>
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" fill="url(#f02-yellow)" stroke="#9d3e80" stroke-width="3"/>
+<path d="M-25-17Q-24-29-13-29M11-28Q21-31 25-19" stroke="#fff8f1" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/>
+</g><g id="f02-gummy-5" transform="translate(199 329) rotate(-20) scale(0.77)">
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" transform="translate(0 5)" fill="#a13a87" stroke="#713065" stroke-width="3.5"/>
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" fill="url(#f02-purple)" stroke="#9d3e80" stroke-width="3"/>
+<path d="M-25-17Q-24-29-13-29M11-28Q21-31 25-19" stroke="#fff8f1" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/>
+</g><g id="f02-gummy-6" transform="translate(283 329) rotate(13) scale(0.87)">
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" transform="translate(0 5)" fill="#a13a87" stroke="#713065" stroke-width="3.5"/>
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" fill="url(#f02-pink)" stroke="#9d3e80" stroke-width="3"/>
+<path d="M-25-17Q-24-29-13-29M11-28Q21-31 25-19" stroke="#fff8f1" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/>
+</g><g id="f02-gummy-7" transform="translate(373 322) rotate(-15) scale(0.8)">
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" transform="translate(0 5)" fill="#a13a87" stroke="#713065" stroke-width="3.5"/>
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" fill="url(#f02-orange)" stroke="#9d3e80" stroke-width="3"/>
+<path d="M-25-17Q-24-29-13-29M11-28Q21-31 25-19" stroke="#fff8f1" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/>
+</g><g id="f02-gummy-8" transform="translate(428 368) rotate(14) scale(0.72)">
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" transform="translate(0 5)" fill="#a13a87" stroke="#713065" stroke-width="3.5"/>
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" fill="url(#f02-pink)" stroke="#9d3e80" stroke-width="3"/>
+<path d="M-25-17Q-24-29-13-29M11-28Q21-31 25-19" stroke="#fff8f1" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/>
+</g><g id="f02-gummy-9" transform="translate(254 390) rotate(-16) scale(0.8)">
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" transform="translate(0 5)" fill="#a13a87" stroke="#713065" stroke-width="3.5"/>
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" fill="url(#f02-orange)" stroke="#9d3e80" stroke-width="3"/>
+<path d="M-25-17Q-24-29-13-29M11-28Q21-31 25-19" stroke="#fff8f1" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/>
+</g><g id="f02-gummy-10" transform="translate(338 395) rotate(10) scale(0.86)">
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" transform="translate(0 5)" fill="#a13a87" stroke="#713065" stroke-width="3.5"/>
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" fill="url(#f02-purple)" stroke="#9d3e80" stroke-width="3"/>
+<path d="M-25-17Q-24-29-13-29M11-28Q21-31 25-19" stroke="#fff8f1" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/>
+</g><g id="f02-gummy-11" transform="translate(331 451) rotate(-5) scale(0.56)">
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" transform="translate(0 5)" fill="#a13a87" stroke="#713065" stroke-width="3.5"/>
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" fill="url(#f02-pink)" stroke="#9d3e80" stroke-width="3"/>
+<path d="M-25-17Q-24-29-13-29M11-28Q21-31 25-19" stroke="#fff8f1" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/>
+</g><g id="f02-gummy-12" transform="translate(325 245) rotate(-6) scale(0.6)">
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" transform="translate(0 5)" fill="#a13a87" stroke="#713065" stroke-width="3.5"/>
+<path d="M0 24C-10 18-35 1-34-16C-33-40-10-43 0-28C10-43 33-40 34-16C35 1 10 18 0 24Z" fill="url(#f02-orange)" stroke="#9d3e80" stroke-width="3"/>
+<path d="M-25-17Q-24-29-13-29M11-28Q21-31 25-19" stroke="#fff8f1" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/>
+</g></g></g>
+<g id="f02-clear-lid" inkscape:groupmode="layer" inkscape:label="03 透明盒盖与边缘"><path d="M320 494C290 472 107 371 111 258C115 155 241 141 320 228C399 141 525 155 529 258C533 371 350 472 320 494Z" fill="url(#f02-lid)" stroke="url(#f02-rim)" stroke-width="13"/><path d="M320 494C290 472 107 371 111 258C115 155 241 141 320 228C399 141 525 155 529 258C533 371 350 472 320 494Z" fill="none" stroke="#6b2b75" stroke-width="3.5"/><path d="M320 494C290 472 107 371 111 258C115 155 241 141 320 228C399 141 525 155 529 258C533 371 350 472 320 494Z" transform="translate(320 325) scale(.93) translate(-320 -325)" stroke="#f9e7ff" stroke-opacity=".88" stroke-width="3"/><path d="M130 253C141 190 229 174 276 214M366 206C413 174 480 198 500 237" stroke="#fffaff" stroke-opacity=".88" stroke-width="8"/><path d="M146 323C171 370 206 404 230 423M359 467C405 436 444 396 460 375" stroke="#fff4ff" stroke-opacity=".58" stroke-width="4"/></g>
+</g></svg>

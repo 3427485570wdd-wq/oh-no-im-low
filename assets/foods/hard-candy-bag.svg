@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="455" height="478" viewBox="99 84 455 478" preserveAspectRatio="none" fill="none" role="img" aria-labelledby="asset-title asset-desc">
+  <title id="asset-title">袋装硬糖 · F01</title>
+  <desc id="asset-desc">紫色半透明糖袋，内有粉色、黄色、紫色三颗独立包装硬糖。背景透明，整袋作为一个游戏物品。所有可见内容均为可编辑矢量路径。</desc>
+  <defs>
+    <linearGradient id="film" x1="135" y1="145" x2="511" y2="506" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#d2adff" stop-opacity=".56"/>
+      <stop offset=".34" stop-color="#ba7aee" stop-opacity=".26"/>
+      <stop offset=".7" stop-color="#c999ff" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#9f55df" stop-opacity=".57"/>
+    </linearGradient>
+    <linearGradient id="seal" x1="0" y1="105" x2="0" y2="147" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e4b9ff"/><stop offset=".36" stop-color="#be7eea"/><stop offset=".72" stop-color="#9e55d7"/><stop offset="1" stop-color="#e6b7ff"/>
+    </linearGradient>
+    <linearGradient id="bottomSeal" x1="0" y1="498" x2="0" y2="537" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#d9a6ff"/><stop offset=".6" stop-color="#a762da"/><stop offset="1" stop-color="#d5a0ff"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="133" y1="270" x2="511" y2="354" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b981f1"/><stop offset=".16" stop-color="#eac7ff" stop-opacity=".75"/>
+      <stop offset=".5" stop-color="#f7dbff" stop-opacity=".14"/><stop offset=".85" stop-color="#ecd0ff" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#9251c8"/>
+    </linearGradient>
+    <linearGradient id="pinkBody" x1="-22" y1="-44" x2="27" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffd9eb"/><stop offset=".34" stop-color="#ff85bd"/><stop offset=".68" stop-color="#f4449f"/><stop offset="1" stop-color="#c82482"/>
+    </linearGradient>
+    <linearGradient id="pinkWrap" x1="-70" y1="-36" x2="-58" y2="37" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffe1f0"/><stop offset=".52" stop-color="#ff8fc6"/><stop offset="1" stop-color="#f14b9e"/>
+    </linearGradient>
+    <linearGradient id="yellowBody" x1="-25" y1="-44" x2="28" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff6b1"/><stop offset=".36" stop-color="#ffdd5b"/><stop offset=".7" stop-color="#ffb72f"/><stop offset="1" stop-color="#ed841b"/>
+    </linearGradient>
+    <linearGradient id="yellowWrap" x1="-65" y1="-37" x2="-51" y2="37" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff8d3"/><stop offset=".5" stop-color="#ffe898"/><stop offset="1" stop-color="#ffc34d"/>
+    </linearGradient>
+    <linearGradient id="purpleBody" x1="-25" y1="-44" x2="29" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f3d8ff"/><stop offset=".33" stop-color="#d6a0f9"/><stop offset=".66" stop-color="#ac60df"/><stop offset="1" stop-color="#8334be"/>
+    </linearGradient>
+    <linearGradient id="purpleWrap" x1="-60" y1="-37" x2="-47" y2="37" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f5deff"/><stop offset=".5" stop-color="#d1a1fc"/><stop offset="1" stop-color="#aa6ae6"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="164" y1="173" x2="431" y2="478" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".44"/><stop offset=".25" stop-color="#fff" stop-opacity=".06"/>
+      <stop offset=".65" stop-color="#fff" stop-opacity=".02"/><stop offset="1" stop-color="#fff" stop-opacity=".18"/>
+    </linearGradient>
+  </defs>
+  <g id="hard-candy-bag" data-food-id="F01" transform="rotate(-7 320 320)" stroke-linejoin="round" stroke-linecap="round">
+    <g id="bag-film-back" inkscape:groupmode="layer" inkscape:label="01 外袋透明薄膜">
+      <path id="bag-silhouette" d="M127 116 139 109 151 116 163 109 175 116 187 109 199 116 211 109 223 116 235 109 247 116 259 109 271 116 283 109 295 116 307 109 319 116 331 109 343 116 355 109 367 116 379 109 391 116 403 109 415 116 427 109 439 116 451 109 463 116 475 109 487 116 499 109 511 116 508 146Q496 215 505 318L519 505 525 528 513 535 501 528 489 535 477 528 465 535 453 528 441 535 429 528 417 535 405 528 393 535 381 528 369 535 357 528 345 535 333 528 321 535 309 528 297 535 285 528 273 535 261 528 249 535 237 528 225 535 213 528 201 535 189 528 177 535 165 528 153 535 141 528 129 535 117 528 123 499 134 324Q142 218 130 145Z" fill="url(#film)" stroke="#582563" stroke-width="5"/>
+      <path d="M143 147Q153 224 146 326L135 499M493 146Q483 217 492 320L505 499" stroke="#b67dec" stroke-opacity=".7" stroke-width="19"/>
+      <path d="M147 154Q158 231 150 322L141 485M488 155Q479 230 488 321L500 483" stroke="#f4d8ff" stroke-opacity=".7" stroke-width="3"/>
+    </g>
+    <g id="three-wrapped-candies" inkscape:groupmode="layer" inkscape:label="02 三颗独立包装糖果">
+    <g id="candy-pink" inkscape:label="candy-pink" transform="translate(315 224) rotate(-13)" stroke="#642455" stroke-linejoin="round" stroke-linecap="round">
+      <g id="candy-pink-wrapper" fill="url(#pinkWrap)" stroke-width="3.8">
+        <path d="M-49-15 -85-39 Q-91-43-96-37 L-106-15 -97 0 -105 22 Q-105 29-98 31 L-86 38 -49 16Z"/>
+        <path d="M49-15 85-39 Q91-43 96-37 L106-15 97 0 105 22 Q105 29 98 31 L86 38 49 16Z"/>
+        <path d="M-91-29-61-9M-96 19-61 7M-87 29-62 12M91-29 61-9M96 19 61 7M87 29 62 12" fill="none" stroke="#fff3fc" stroke-opacity=".73" stroke-width="3"/>
+        <path d="M-97 0-59 0M97 0 59 0" fill="none" stroke="#762b79" stroke-opacity=".48" stroke-width="2.5"/>
+      </g>
+      <path id="candy-pink-body" d="M-56-22Q-51-43-27-45L22-45Q49-44 55-24L60 15Q58 39 32 43L-24 44Q-51 41-56 23Z" fill="url(#pinkBody)" stroke-width="4.2"/>
+      <path d="M-48-15Q-42-34-23-35L24-35Q42-35 46-23" fill="none" stroke="#fff7e8" stroke-opacity=".9" stroke-width="6"/>
+      <path d="M-48 22Q-13 37 35 26" fill="none" stroke="#fff6e7" stroke-opacity=".7" stroke-width="3"/>
+      <path d="M-49 7Q-1-5 50-13M-41 24Q4 10 51 0" fill="none" stroke="#fff5eb" stroke-opacity=".3" stroke-width="3"/>
+      <path d="M-38-25Q-30-31-13-31" fill="none" stroke="#fff" stroke-width="6"/>
+      <path d="M-52-12Q-56 1-51 18M52-12Q57 2 52 18" fill="none" stroke="#6e2455" stroke-opacity=".42" stroke-width="3"/>
+    </g>
+    <g id="candy-purple" inkscape:label="candy-purple" transform="translate(401 363) rotate(67)" stroke="#642455" stroke-linejoin="round" stroke-linecap="round">
+      <g id="candy-purple-wrapper" fill="url(#purpleWrap)" stroke-width="3.8">
+        <path d="M-49-15 -85-39 Q-91-43-96-37 L-106-15 -97 0 -105 22 Q-105 29-98 31 L-86 38 -49 16Z"/>
+        <path d="M49-15 85-39 Q91-43 96-37 L106-15 97 0 105 22 Q105 29 98 31 L86 38 49 16Z"/>
+        <path d="M-91-29-61-9M-96 19-61 7M-87 29-62 12M91-29 61-9M96 19 61 7M87 29 62 12" fill="none" stroke="#fff3fc" stroke-opacity=".73" stroke-width="3"/>
+        <path d="M-97 0-59 0M97 0 59 0" fill="none" stroke="#762b79" stroke-opacity=".48" stroke-width="2.5"/>
+      </g>
+      <path id="candy-purple-body" d="M-56-22Q-51-43-27-45L22-45Q49-44 55-24L60 15Q58 39 32 43L-24 44Q-51 41-56 23Z" fill="url(#purpleBody)" stroke-width="4.2"/>
+      <path d="M-48-15Q-42-34-23-35L24-35Q42-35 46-23" fill="none" stroke="#fff7e8" stroke-opacity=".9" stroke-width="6"/>
+      <path d="M-48 22Q-13 37 35 26" fill="none" stroke="#fff6e7" stroke-opacity=".7" stroke-width="3"/>
+      <path d="M-49 7Q-1-5 50-13M-41 24Q4 10 51 0" fill="none" stroke="#fff5eb" stroke-opacity=".3" stroke-width="3"/>
+      <path d="M-38-25Q-30-31-13-31" fill="none" stroke="#fff" stroke-width="6"/>
+      <path d="M-52-12Q-56 1-51 18M52-12Q57 2 52 18" fill="none" stroke="#6e2455" stroke-opacity=".42" stroke-width="3"/>
+    </g>
+    <g id="candy-yellow" inkscape:label="candy-yellow" transform="translate(267 409) rotate(4)" stroke="#642455" stroke-linejoin="round" stroke-linecap="round">
+      <g id="candy-yellow-wrapper" fill="url(#yellowWrap)" stroke-width="3.8">
+        <path d="M-49-15 -85-39 Q-91-43-96-37 L-106-15 -97 0 -105 22 Q-105 29-98 31 L-86 38 -49 16Z"/>
+        <path d="M49-15 85-39 Q91-43 96-37 L106-15 97 0 105 22 Q105 29 98 31 L86 38 49 16Z"/>
+        <path d="M-91-29-61-9M-96 19-61 7M-87 29-62 12M91-29 61-9M96 19 61 7M87 29 62 12" fill="none" stroke="#fff3fc" stroke-opacity=".73" stroke-width="3"/>
+        <path d="M-97 0-59 0M97 0 59 0" fill="none" stroke="#762b79" stroke-opacity=".48" stroke-width="2.5"/>
+      </g>
+      <path id="candy-yellow-body" d="M-56-22Q-51-43-27-45L22-45Q49-44 55-24L60 15Q58 39 32 43L-24 44Q-51 41-56 23Z" fill="url(#yellowBody)" stroke-width="4.2"/>
+      <path d="M-48-15Q-42-34-23-35L24-35Q42-35 46-23" fill="none" stroke="#fff7e8" stroke-opacity=".9" stroke-width="6"/>
+      <path d="M-48 22Q-13 37 35 26" fill="none" stroke="#fff6e7" stroke-opacity=".7" stroke-width="3"/>
+      <path d="M-49 7Q-1-5 50-13M-41 24Q4 10 51 0" fill="none" stroke="#fff5eb" stroke-opacity=".3" stroke-width="3"/>
+      <path d="M-38-25Q-30-31-13-31" fill="none" stroke="#fff" stroke-width="6"/>
+      <path d="M-52-12Q-56 1-51 18M52-12Q57 2 52 18" fill="none" stroke="#6e2455" stroke-opacity=".42" stroke-width="3"/>
+    </g>
+    </g>
+    <g id="bag-film-front" inkscape:groupmode="layer" inkscape:label="03 外袋折角与反光">
+      <path d="M145 150 171 178 167 259 150 304Q157 216 145 150Z" fill="url(#edge)" stroke="#9560c8" stroke-opacity=".58" stroke-width="2"/>
+      <path d="M490 149 466 180 470 261 490 307Q480 220 490 149Z" fill="url(#edge)" stroke="#9560c8" stroke-opacity=".58" stroke-width="2"/>
+      <path d="M141 493 170 463 186 489 169 503ZM499 492 471 462 456 490 477 504Z" fill="#d7acff" fill-opacity=".69" stroke="#a666cf" stroke-opacity=".8" stroke-width="2"/>
+      <path d="M157 162Q312 151 480 162L489 476Q316 493 151 479Q168 322 157 162Z" fill="url(#sheen)"/>
+      <path d="M160 176Q167 208 165 236M164 255 162 274" stroke="#fff9ff" stroke-opacity=".9" stroke-width="8"/>
+      <path d="M477 363Q483 411 484 455" stroke="#fdf1ff" stroke-opacity=".8" stroke-width="6"/>
+      <path d="M183 167Q287 158 371 163M197 489Q293 497 390 490" stroke="#fff4ff" stroke-opacity=".64" stroke-width="3"/>
+      <path d="M164 335 153 407 164 458M475 187 482 225M477 475 461 483" stroke="#7f3ba6" stroke-opacity=".34" stroke-width="3"/>
+    </g>
+    <g id="sealed-edges" inkscape:groupmode="layer" inkscape:label="04 上下封口">
+      <path d="M128 117 139 109 151 116 163 109 175 116 187 109 199 116 211 109 223 116 235 109 247 116 259 109 271 116 283 109 295 116 307 109 319 116 331 109 343 116 355 109 367 116 379 109 391 116 403 109 415 116 427 109 439 116 451 109 463 116 475 109 487 116 499 109 511 116 507 147Q316 136 131 147Z" fill="url(#seal)" stroke="#67377e" stroke-width="3"/>
+      <path d="M133 131Q318 122 504 131M134 141Q319 132 504 141" stroke="#f7dcff" stroke-opacity=".8" stroke-width="2.7"/>
+      <path d="M123 499Q319 512 519 505L525 528 513 535 501 528 489 535 477 528 465 535 453 528 441 535 429 528 417 535 405 528 393 535 381 528 369 535 357 528 345 535 333 528 321 535 309 528 297 535 285 528 273 535 261 528 249 535 237 528 225 535 213 528 201 535 189 528 177 535 165 528 153 535 141 528 129 535 117 528Z" fill="url(#bottomSeal)" stroke="#67377e" stroke-width="3"/>
+      <path d="M126 512Q323 525 516 518" stroke="#f3d2ff" stroke-width="3"/>
+      <path d="M128 520Q319 533 515 526" stroke="#793b9b" stroke-opacity=".5" stroke-width="2"/>
+    </g>
+  </g>
+</svg>
