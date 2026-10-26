@@ -2,6 +2,7 @@ const http = require("node:http");
 const fs = require("node:fs/promises");
 const path = require("node:path");
 const root = path.resolve(__dirname, "..");
+const version = require("../package.json").version;
 const port = Number(process.env.PORT || 5173);
 const types = {
   ".html": "text/html; charset=utf-8",
@@ -43,5 +44,5 @@ server.on("error", error => {
   process.exitCode = 1;
 });
 server.listen(port, "127.0.0.1", () => {
-  console.log("Oh No, I'm Low! · V0.1\nLocal: http://127.0.0.1:" + port);
+  console.log("Oh No, I'm Low! · V" + version + "\nLocal: http://127.0.0.1:" + port);
 });
