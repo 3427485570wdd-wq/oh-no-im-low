@@ -155,7 +155,7 @@
     if (type === "intro") {
       icon.textContent = "♥"; heading.textContent = "Oh No, I’m Low!";
       subtitle.textContent = "从这张凌乱的桌面开始，找到可以补充糖分的食品。";
-      body.innerHTML = '<ol class="instruction-list"><li><span>01</span><div><strong>按住鼠标，拿起食品</strong><p>移动到下方卡通嘴巴所在的进食区。</p></div></li><li><span>02</span><div><strong>按住空格键张嘴</strong><p>食品进入进食区并张嘴后，会自动吃下整份。</p></div></li><li><span>03</span><div><strong>等待钟表，再看状态</strong><p>未恢复时继续寻找，也可以查看已吃食品的补充记录。</p></div></li></ol><p class="simulation-note">本游戏为简化模拟，不能用于判断真实血糖或决定补糖量。本版使用鼠标与键盘。</p>';
+      body.innerHTML = '<ol class="instruction-list"><li><span>01</span><div><strong>按住鼠标，拿起食品</strong><p>移动到下方卡通嘴巴所在的进食区。</p></div></li><li><span>02</span><div><strong>按住空格键张嘴</strong><p>食品进入进食区并张嘴后，会自动吃下整份。</p></div></li><li><span>03</span><div><strong>等待钟表，再看状态</strong><p>未恢复时继续寻找；寻找倒计时会随本次模拟状态更新。</p></div></li></ol><p class="simulation-note">本游戏为简化模拟，不能用于判断真实血糖或决定补糖量。本版使用鼠标与键盘。</p>';
       buttons.append(action("开始寻找", () => { rules.start(game); closePanel(); render(); }));
     } else if (type === "pause") {
       icon.textContent = "Ⅱ"; heading.textContent = "暂停一下"; subtitle.textContent = "寻找、等待和状态变化都已暂停。";
@@ -223,6 +223,16 @@
   $("restart-button").addEventListener("click", () => openPanel("restart"));
   function render() {
     const level = rules.displayLevel(game), ratio = rules.ratio(level), isWaiting = game.phase === "waiting";
+    const remaining = rules.remainingSearchSeconds(game);
+    const timerText = remaining === null ? "--:--"
+      : String(Math.floor(remaining / 60)).padStart(2, "0") + ":" + String(remaining % 60).padStart(2, "0");
+    const timerLabel = game.phase === "recovered" ? "已恢复"
+      : ["fading", "gameover"].includes(game.phase) ? "时间到"
+      : suspended() ? "已暂停" : isWaiting ? "等待中" : "寻找倒计时";
+    if ($("search-time").textContent !== timerText) $("search-time").textContent = timerText;
+    $("search-timer-label").textContent = timerLabel;
+    const timerAccess = timerLabel + " " + timerText;
+    if ($("search-timer-access").textContent !== timerAccess) $("search-timer-access").textContent = timerAccess;
     stage.dataset.phase = game.phase; stage.dataset.suspended = String(suspended());
     $("ui-status-progress").setAttribute("width", String(Math.max(0, 440 * ratio)));
     $("ui-status-progress").setAttribute("fill", level >= rules.config.recovery ? "#7ce6a1" : level < rules.config.danger ? "#fa6d9e" : "url(#ui-amber)");

@@ -220,3 +220,6 @@ tbody td:last-child { font-weight: 800; white-space: nowrap; }
 }
 @media (orientation: portrait) { .portrait-hint { display: inline; } }
 @media (prefers-reduced-motion: reduce) { .food.is-eaten { animation-duration: .01s; } }
+
+/* The timer uses the same editable SVG rim, gradients and type as the fixed HUD. */
+.stage[data-phase="fading"] #search-time, .stage[data-phase="gameover"] #search-time { fill: #ff8db6; }

@@ -2,9 +2,11 @@
 (() => {
   "use strict";
   const app = window.OhNoImLow;
-  const config = Object.freeze({ initial: 3.4, recovery: 4, danger: 3, failure: 2.5,
-    searchStepSeconds: 20, searchDrop: .1, waitSeconds: 4, waitDrop: .1,
-    responsePerCarb: .06, fadeSeconds: 2 });
+  const settings = { initial: 3.4, recovery: 4, danger: 3, failure: 2.5,
+    initialSearchSeconds: 60, searchDrop: .1, waitSeconds: 4, waitDrop: .1,
+    responsePerCarb: .06, fadeSeconds: 2 };
+  const config = Object.freeze({ ...settings, searchStepSeconds: settings.initialSearchSeconds
+    / Math.round((settings.initial - settings.failure) / settings.searchDrop) });
   const round = value => Math.round((value + Number.EPSILON) * 10) / 10;
   const create = () => ({ phase: "intro", level: config.initial, searchElapsed: 0,
     waitElapsed: 0, fadeElapsed: 0, pending: null, deferredCarbs: 0, records: [], consumed: [] });
@@ -47,6 +49,14 @@
     ? game.pending.from + (game.pending.to - game.pending.from) * Math.min(1, game.waitElapsed / config.waitSeconds)
     : game.level;
   const ratio = level => Math.max(0, Math.min(1, (level - config.failure) / (config.recovery - config.failure)));
+  // Countdown reflects the existing search decay, including the unfinished interval.
+  // Waiting freezes it; only a completed food response changes the remaining budget.
+  const remainingSearchSeconds = game => {
+    if (game.phase === "recovered") return null;
+    if (["fading", "gameover"].includes(game.phase)) return 0;
+    const steps = Math.max(0, Math.ceil((game.level - config.failure) / config.searchDrop - 1e-9));
+    return Math.max(0, Math.ceil(steps * config.searchStepSeconds - game.searchElapsed - 1e-9));
+  };
   const totalCarbs = game => round(game.records.reduce((sum, row) => sum + row.carbs, 0));
-  app.rules = Object.freeze({ config, create, start, eat, tick, displayLevel, ratio, totalCarbs });
+  app.rules = Object.freeze({ config, create, start, eat, tick, displayLevel, ratio, totalCarbs, remainingSearchSeconds });
 })();

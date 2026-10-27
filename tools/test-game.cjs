@@ -36,19 +36,19 @@ check('cookie response carries to the next wait without rebilling carbs', () => 
   assert.equal(g.level, 3.7); assert.equal(g.deferredCarbs, 0); assert.equal(rules.totalCarbs(g), 7.3);
 });
 check('two matching packets are independent portions', () => {
-  const g = newGame(); rules.tick(g, 120); rules.eat(g, 'F06'); rules.tick(g, 4);
+  const g = newGame(); rules.tick(g, rules.config.searchStepSeconds * 6); rules.eat(g, 'F06'); rules.tick(g, 4);
   assert.equal(g.phase, 'search'); assert.equal(rules.eat(g, 'F07'), true);
   rules.tick(g, 4); assert.equal(rules.totalCarbs(g), 30.6); assert.equal(g.consumed.length, 2);
 });
 check('pause freezes both wait and accumulated search time', () => {
-  const g = newGame(); rules.tick(g, 19); rules.tick(g, 50, true);
-  assert.equal(g.level, 3.4); assert.equal(g.searchElapsed, 19);
+  const g = newGame(); rules.tick(g, rules.config.searchStepSeconds - 1); rules.tick(g, 50, true);
+  assert.equal(g.level, 3.4); assert.equal(g.searchElapsed, rules.config.searchStepSeconds - 1);
   rules.eat(g, 'F02'); rules.tick(g, 1); rules.tick(g, 50, true);
   assert.equal(g.waitElapsed, 1); rules.tick(g, 3); assert.equal(g.phase, 'search');
   rules.tick(g, 1); assert.equal(g.level, 3.7);
 });
 check('extreme decline fades before GAME OVER; fade also pauses', () => {
-  const g = newGame(); rules.tick(g, 180); assert.equal(g.phase, 'fading');
+  const g = newGame(); rules.tick(g, rules.config.initialSearchSeconds); assert.equal(g.phase, 'fading');
   assert.equal(rules.eat(g, 'F01'), false); rules.tick(g, 1); rules.tick(g, 20, true);
   assert.equal(g.phase, 'fading'); rules.tick(g, 1); assert.equal(g.phase, 'gameover');
 });
@@ -56,6 +56,21 @@ check('a fresh game clears history, pending response and consumed food', () => {
   const first = newGame(); rules.eat(first, 'F04'); const next = newGame();
   assert.equal(next.records.length, 0); assert.equal(next.consumed.length, 0);
   assert.equal(next.pending, null); assert.equal(next.deferredCarbs, 0);
+});
+check('search countdown matches the failure boundary and freezes while paused', () => {
+  const g = newGame(); assert.equal(rules.remainingSearchSeconds(g), 60);
+  rules.tick(g, 1.2); assert.equal(rules.remainingSearchSeconds(g), 59);
+  rules.tick(g, 30, true); assert.equal(rules.remainingSearchSeconds(g), 59);
+  rules.tick(g, 18.8); assert.equal(rules.remainingSearchSeconds(g), 40);
+  rules.tick(g, 40); assert.equal(g.phase, 'fading'); assert.equal(rules.remainingSearchSeconds(g), 0);
+});
+check('countdown freezes during waiting and updates only after settlement', () => {
+  const g = newGame(); rules.tick(g, 2); rules.eat(g, 'F02');
+  assert.equal(rules.remainingSearchSeconds(g), 58);
+  rules.tick(g, 2); assert.equal(rules.remainingSearchSeconds(g), 58);
+  rules.tick(g, 2); assert.equal(rules.remainingSearchSeconds(g), 85);
+  rules.eat(g, 'F01'); rules.tick(g, 4);
+  assert.equal(g.phase, 'recovered'); assert.equal(rules.remainingSearchSeconds(g), null);
 });
 check('all fixed UI bindings exist and HTML IDs are unique', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
