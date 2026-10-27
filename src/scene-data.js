@@ -1,7 +1,7 @@
 /* Positions use the original tabletop coordinates. Portions are game presets. */
 window.OhNoImLow = window.OhNoImLow || {};
 window.OhNoImLow.scene = {
-  version: "0.2.1",
+  version: "0.3.0",
   width: 1672,
   height: 941,
   // Centers and dimensions are fractions of the world layer, independent of UI.

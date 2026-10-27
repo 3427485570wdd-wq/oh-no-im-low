@@ -7,7 +7,12 @@
   const toast = $("feedback"), live = $("announcer");
   let game = rules.create(), drag = null, spaceHeld = false, mouthLatched = false;
   let panel = null, panelBack = null, feedbackLeft = 0, last = performance.now();
-  const suspended = () => dialog.open || document.hidden;
+  let inputMode = "mouse", handTracked = false, lastHand = null, missingSince = null;
+  let cameraState = "off", cameraMessage = "摄像头已关闭", cameraStartControl = null, cameraStatusText = null;
+  let hoveredFood = null;
+  const gesture = new window.OhNoImLow.HandGesture();
+  const camera = new window.OhNoImLow.HandCamera($("hand-video"), onHandSample, onCameraState);
+  const suspended = () => dialog.open || document.hidden || (inputMode === "hand" && !handTracked);
   const active = () => game.phase === "search" && !suspended();
   const mouthOpen = () => active() && (spaceHeld || mouthLatched);
   const grams = value => value.toFixed(1).replace(/\.0$/, "");
@@ -15,6 +20,83 @@
   function feedback(message, seconds = 4) {
     toast.textContent = message; feedbackLeft = seconds; toast.hidden = false; say(message);
   }
+  function clearHandHover() {
+    if (hoveredFood) hoveredFood.node.classList.remove("hand-hover");
+    hoveredFood = null;
+  }
+  function updateCameraUI() {
+    $("input-mode-label").textContent = inputMode === "hand"
+      ? cameraState === "loading" ? "正在开启手势…" : handTracked ? "手势已识别" : "手势未就绪" : "鼠标操作";
+    $("mode-button").textContent = inputMode === "hand" ? "手势设置" : "开启手势";
+    $("input-mode-label").dataset.ready = String(handTracked);
+    if (cameraStatusText && cameraStatusText.textContent !== cameraMessage) cameraStatusText.textContent = cameraMessage;
+    if (cameraStartControl) cameraStartControl.disabled = !handTracked || !lastHand?.ready;
+  }
+  function onCameraState(state, message) {
+    cameraState = state; cameraMessage = message;
+    if (["error", "off", "loading"].includes(state)) {
+      handTracked = false; gesture.reset(); lastHand = null; missingSince = performance.now();
+      clearHandHover(); closeMouth();
+      if (drag?.kind === "hand") finishDrag(true);
+    }
+    updateCameraUI();
+  }
+  function onHandSample(points, timestamp, aspect) {
+    if (inputMode !== "hand") return;
+    const wasTracked = handTracked;
+    const sample = gesture.update(points, timestamp, aspect);
+    handTracked = sample.tracked; lastHand = sample;
+    if (!sample.tracked) {
+      if (missingSince === null) missingSince = performance.now();
+      if (!["error", "loading"].includes(cameraState)) cameraMessage = "手部暂未识别，游戏已暂停。请把一只手放回摄像头前。";
+      clearHandHover(); closeMouth();
+      if (drag?.kind === "hand") finishDrag(true);
+      updateCameraUI(); return;
+    }
+    missingSince = null;
+    if (!wasTracked) last = performance.now();
+    cameraMessage = sample.ready ? "已识别手部，可以开始。食指移动，捏合拿起，松开放下。"
+      : sample.pinching ? "正在捏合；开始前请先松开拇指和食指。" : "已识别手部，请先松开拇指和食指。";
+    updateCameraUI();
+    const cursor = $("hand-cursor");
+    cursor.style.left = sample.x * 100 + "%"; cursor.style.top = sample.y * 100 + "%";
+    cursor.classList.toggle("is-pinching", sample.pinching);
+    if (!active()) { clearHandHover(); return; }
+    clearHandHover();
+    if (!drag) {
+      // Follow the actual tabletop stacking order when small items overlap.
+      for (const node of Array.from(foodLayer.children).reverse()) {
+        const item = items.get(node.dataset.foodId);
+        if (!item || node.hidden || node.disabled) continue;
+        if (Math.abs(sample.x - item.x) <= item.width / 2 + .008 && Math.abs(sample.y - item.y) <= item.height / 2 + .008) {
+          hoveredFood = item; node.classList.add("hand-hover"); break;
+        }
+      }
+      if (sample.pressed && hoveredFood) beginDrag(hoveredFood, "hand", null, sample.x - hoveredFood.x, sample.y - hoveredFood.y);
+    }
+    if (drag?.kind === "hand") {
+      moveDrag(sample.x - drag.dx, sample.y - drag.dy);
+      if (sample.released && drag?.kind === "hand") finishDrag(false);
+    }
+  }
+  function stopHandMode() {
+    inputMode = "mouse"; camera.stop(); gesture.reset(); lastHand = null;
+    handTracked = false; missingSince = null; clearHandHover(); closeMouth();
+    if (drag?.kind === "hand") finishDrag(true);
+    updateCameraUI(); last = performance.now();
+  }
+  function beginCamera() {
+    inputMode = "hand"; handTracked = false; lastHand = null; gesture.reset();
+    missingSince = performance.now(); clearHandHover(); camera.start();
+  }
+  function useMouse() {
+    stopHandMode(); if (game.phase === "intro") rules.start(game);
+    closePanel(); render();
+  }
+  $("mode-button").addEventListener("click", () => {
+    openPanel("camera"); if (inputMode !== "hand" || !camera.running) beginCamera();
+  });
+  window.addEventListener("pagehide", () => camera.stop(false));
   function place(item) {
     item.node.style.left = item.x * 100 + "%"; item.node.style.top = item.y * 100 + "%";
   }
@@ -74,11 +156,14 @@
   }
   function finishDrag(cancelled) {
     if (!drag) return;
-    const previous = drag, item = items.get(previous.id); drag = null;
+    const previous = drag, item = items.get(previous.id);
+    const closedMouthDrop = !cancelled && active() && inMouth(item) && !mouthOpen();
+    drag = null;
     if (cancelled) { item.x = previous.fromX; item.y = previous.fromY; place(item); }
     item.node.classList.remove("is-held"); item.node.removeAttribute("aria-pressed");
     if (previous.pointerId !== null && item.node.hasPointerCapture(previous.pointerId)) item.node.releasePointerCapture(previous.pointerId);
     foodLayer.append(item.node); renderMouth();
+    if (closedMouthDrop) feedback("还没有吃下：拿起食品，按住空格张嘴。", 4);
   }
   function inMouth(item) { return item.x >= .405 && item.x <= .595 && item.y >= .795 && item.y <= .985; }
   function tryEat() {
@@ -99,6 +184,7 @@
     $("mouth-closed").setAttribute("display", open ? "none" : "inline");
     mouthButton.setAttribute("aria-pressed", String(open)); mouthButton.setAttribute("aria-label", open ? "闭嘴" : "张嘴");
     mouthButton.classList.toggle("is-target", Boolean(drag && inMouth(items.get(drag.id))));
+    $("mouth-prompt").hidden = !(active() && drag && inMouth(items.get(drag.id)) && !open);
   }
   mouthButton.addEventListener("click", () => {
     if (active()) { mouthLatched = !mouthLatched; renderMouth(); tryEat(); }
@@ -130,6 +216,10 @@
     button.textContent = label; button.addEventListener("click", callback); return button;
   }
   function closePanel() {
+    if (inputMode === "hand" && !handTracked && ["search", "waiting", "fading"].includes(game.phase)) {
+      openPanel("camera"); return;
+    }
+    gesture.disarm(); clearHandHover();
     dialog.close(); panel = null; panelBack = null; stage.dataset.suspended = "false"; last = performance.now();
     (game.phase === "search" ? stage : recordButton).focus({ preventScroll: true });
   }
@@ -144,7 +234,8 @@
     feedbackLeft = 0; toast.hidden = true; closePanel(); render(); say("新的一局开始了。在桌面中寻找食品。");
   }
   function openPanel(type, back = null) {
-    finishDrag(true); closeMouth(); panel = type; panelBack = back; stage.dataset.suspended = "true";
+    finishDrag(true); closeMouth(); gesture.disarm(); clearHandHover();
+    cameraStartControl = null; cameraStatusText = null; panel = type; panelBack = back; stage.dataset.suspended = "true";
     content.replaceChildren(); dialog.dataset.panel = type;
     const icon = document.createElement("div"); icon.className = "panel-emblem"; icon.setAttribute("aria-hidden", "true");
     const heading = document.createElement("h1"); heading.id = "panel-title";
@@ -154,12 +245,32 @@
     content.append(icon, heading, subtitle, body, buttons);
     if (type === "intro") {
       icon.textContent = "♥"; heading.textContent = "Oh No, I’m Low!";
-      subtitle.textContent = "从这张凌乱的桌面开始，找到可以补充糖分的食品。";
-      body.innerHTML = '<ol class="instruction-list"><li><span>01</span><div><strong>按住鼠标，拿起食品</strong><p>移动到下方卡通嘴巴所在的进食区。</p></div></li><li><span>02</span><div><strong>按住空格键张嘴</strong><p>食品进入进食区并张嘴后，会自动吃下整份。</p></div></li><li><span>03</span><div><strong>等待钟表，再看状态</strong><p>未恢复时继续寻找；寻找倒计时会随本次模拟状态更新。</p></div></li></ol><p class="simulation-note">本游戏为简化模拟，不能用于判断真实血糖或决定补糖量。本版使用鼠标与键盘。</p>';
-      buttons.append(action("开始寻找", () => { rules.start(game); closePanel(); render(); }));
+      subtitle.textContent = "从这张凌乱的桌面开始，用手势或鼠标寻找食品。";
+      body.innerHTML = '<ol class="instruction-list"><li><span>01</span><div><strong>食指移动，捏合抓取</strong><p>开启手势后操作，或选择鼠标拖动食品。</p></div></li><li><span>02</span><div><strong>按住空格键张嘴</strong><p>食品进入进食区并张嘴后，会自动吃下整份。</p></div></li><li><span>03</span><div><strong>等待钟表，再看状态</strong><p>未恢复时继续寻找；寻找倒计时会随本次模拟状态更新。</p></div></li></ol><p class="simulation-note">本游戏为简化模拟，不能用于判断真实血糖或决定补糖量。本版支持手势或鼠标，张嘴仍由空格或点击嘴巴控制。</p>';
+      buttons.append(action("开启摄像头", () => { openPanel("camera"); beginCamera(); }), action("使用鼠标开始", useMouse, true));
+    } else if (type === "camera") {
+      const handIcon = document.createElement("img"); handIcon.src = "./assets/ui/hand-control.svg"; handIcon.alt = ""; icon.append(handIcon);
+      heading.textContent = "准备好你的手";
+      subtitle.textContent = "一只手就够了；先松开拇指和食指，让系统识别。";
+      body.innerHTML = '<div class="hand-instructions"><p><strong>食指移动</strong><span>控制桌面上的粉色光标</span></p><p><strong>捏合／松开</strong><span>拿起／放下食品</span></p><p><strong>按住空格</strong><span>张嘴进食</span></p></div>';
+      cameraStatusText = document.createElement("p"); cameraStatusText.className = "camera-status";
+      cameraStatusText.setAttribute("role", "status"); body.append(cameraStatusText);
+      const privacy = document.createElement("p"); privacy.className = "simulation-note";
+      privacy.textContent = "画面仅在本机识别，不显示、不保存、不上传。识别丢失时游戏暂停；随时可改用鼠标并关闭摄像头。";
+      body.append(privacy);
+      cameraStartControl = action(game.phase === "intro" ? "开始寻找" : "继续游戏", () => {
+        if (!handTracked || !lastHand?.ready) return;
+        if (game.phase === "intro") rules.start(game);
+        closePanel(); render();
+      });
+      cameraStartControl.disabled = true;
+      buttons.append(cameraStartControl, action("重新开启摄像头", beginCamera, true), action("改用鼠标", useMouse, true));
+      if (game.phase !== "intro") buttons.append(action("重新开始这一局", resetGame, true));
+      updateCameraUI();
     } else if (type === "pause") {
       icon.textContent = "Ⅱ"; heading.textContent = "暂停一下"; subtitle.textContent = "寻找、等待和状态变化都已暂停。";
       buttons.append(action("继续游戏", closePanel), action("查看补充记录", () => openPanel("records", "pause"), true));
+      if (inputMode === "hand") buttons.append(action("手势设置", () => openPanel("camera"), true));
     } else if (type === "restart") {
       icon.textContent = "↻"; heading.textContent = "重新开始这一局？";
       subtitle.textContent = "桌面食品会回到原位，本局补充记录将清空。";
@@ -209,10 +320,11 @@
       note.textContent = recovered ? "本局结果来自简化的游戏规则，不代表现实中相同食品会带来相同变化。"
         : "现实中的严重低血糖需要他人协助。失去意识时，不应继续喂食或饮水。";
       body.append(note); buttons.append(action("再玩一次", resetGame), action("查看补充记录", () => openPanel("records", "ending"), true));
+      if (inputMode === "hand") buttons.append(action("关闭摄像头", () => { stopHandMode(); openPanel("ending"); }, true));
     }
     if (!dialog.open) dialog.showModal();
-    const focusTarget = type === "records" ? heading : buttons.querySelector("button");
-    focusTarget.tabIndex = type === "records" ? -1 : 0; focusTarget.focus({ preventScroll: true });
+    const focusTarget = ["records", "camera"].includes(type) ? heading : buttons.querySelector("button");
+    focusTarget.tabIndex = ["records", "camera"].includes(type) ? -1 : 0; focusTarget.focus({ preventScroll: true });
     last = performance.now(); render();
   }
   dialog.addEventListener("cancel", event => {
@@ -248,16 +360,22 @@
     pauseButton.disabled = !["search", "waiting", "fading"].includes(game.phase);
     $("restart-button").disabled = game.phase === "intro"; recordButton.disabled = game.phase === "intro";
     mouthButton.disabled = !active();
+    $("mode-button").disabled = ["recovered", "gameover"].includes(game.phase);
+    $("hand-cursor").hidden = inputMode !== "hand" || !handTracked || !active();
+    updateCameraUI();
+    $("interaction-hint").textContent = inputMode === "hand" ? "食指移动 · 捏合抓取 · 空格张嘴 · Esc 暂停" : "鼠标拖动食品 · 空格张嘴 · Esc 暂停";
     for (const item of items.values()) {
       const eaten = game.consumed.includes(item.id); item.node.disabled = eaten || !active();
       if (eaten && (!isWaiting || game.pending.foodId !== item.id || game.waitElapsed >= .35)) item.node.hidden = true;
     }
-    $("ui-hint-face").textContent = isWaiting ? "稍等片刻" : game.phase === "fading" ? "身体状态正在变差" : "鼠标按住食品 · 拖到嘴边";
-    $("ui-hint-hand-mouth").textContent = isWaiting ? "可查看补充记录" : "空格张嘴 · 也可点击嘴巴";
+    $("ui-hint-face").textContent = isWaiting ? "稍等片刻" : game.phase === "fading" ? "身体状态正在变差" : inputMode === "hand" ? "食指移动 · 捏合抓取" : "鼠标按住食品 · 拖到嘴边";
+    $("ui-hint-hand-mouth").textContent = isWaiting ? "可查看补充记录" : inputMode === "hand" ? "空格张嘴 · 松开放下" : "空格张嘴 · 也可点击嘴巴";
     renderMouth();
   }
   function frame(now) {
     const seconds = Math.max(0, (now - last) / 1000); last = now;
+    if (inputMode === "hand" && !handTracked && missingSince !== null && now - missingSince > 250 &&
+        !dialog.open && ["search", "waiting", "fading"].includes(game.phase)) openPanel("camera");
     const before = game.phase, beforeLevel = game.level; rules.tick(game, seconds, suspended());
     if (!suspended() && feedbackLeft > 0) { feedbackLeft -= seconds; if (feedbackLeft <= 0) toast.hidden = true; }
     if (game.phase !== before) {

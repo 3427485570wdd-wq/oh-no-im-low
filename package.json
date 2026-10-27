@@ -1,11 +1,11 @@
 {
   "name": "oh-no-im-low",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "private": true,
-  "description": "Oh No, I'm Low! — V0.2 完整鼠标可玩版本",
+  "description": "Oh No, I'm Low! — V0.3 摄像头手势抓取版本",
   "scripts": {
     "dev": "node tools/serve.cjs",
     "start": "node tools/serve.cjs",
-    "test": "node tools/test-game.cjs"
+    "test": "node tools/test-game.cjs && node tools/test-hands.cjs"
   }
 }

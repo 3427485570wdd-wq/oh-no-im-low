@@ -5,15 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#31142f">
   <meta name="description" content="Oh No, I'm Low! 在凌乱桌面寻找食品、模拟进食并观察状态变化的互动游戏。">
-  <title>Oh No, I'm Low! · V0.2.1</title>
+  <title>Oh No, I'm Low! · V0.3</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ctext y='33' font-size='34'%3E%E2%99%A5%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="./styles.css">
   <script src="./src/scene-data.js" defer></script>
   <script src="./src/game-rules.js" defer></script>
+  <script src="./src/hand-gesture.js" defer></script>
+  <script src="./src/hand-camera.js" defer></script>
   <script src="./src/app.js" defer></script>
 </head>
 <body>
-  <header class="project-header"><p class="project-name">Oh No, I’m Low!</p><span class="version-badge">V0.2.1 · 鼠标可玩版</span></header>
+  <header class="project-header"><p class="project-name">Oh No, I’m Low!</p><div class="header-controls"><span id="input-mode-label" class="input-mode-label">鼠标操作</span><button id="mode-button" class="mode-button" type="button">开启手势</button><span class="version-badge">V0.3 · 手势抓取版</span></div></header>
   <main class="stage-area" id="stage-area">
     <section class="stage" id="game-stage" tabindex="-1" aria-label="低血糖互动游戏桌面" aria-describedby="keyboard-help status-description">
       <div class="world-layer" id="world-layer" data-layer="world">
@@ -54,6 +56,7 @@
       <button id="record-button" class="hotspot record-hit" type="button" title="补充记录"><span class="sr-only">补充记录</span></button>
       <button id="mouth-button" class="hotspot mouth-hit" type="button" aria-label="张嘴" aria-pressed="false" title="点击切换张嘴或闭嘴"></button>
       <div id="drag-layer" class="drag-layer"></div>
+      <div id="hand-cursor" class="hand-cursor" hidden aria-hidden="true"><svg viewBox="0 0 40 48"><path d="M5 3L34 25L22 28L17 42L5 3Z" fill="#ef3d9c" stroke="#fff5ef" stroke-width="4" stroke-linejoin="round"/><circle cx="29" cy="9" r="5" fill="#ffe58f" stroke="#8e3078" stroke-width="2"/></svg></div>
       <div id="waiting-layer" class="waiting-layer" hidden role="status" aria-label="正在等待本次模拟结果">
         <svg class="waiting-clock" viewBox="0 0 240 240" aria-hidden="true">
           <defs><linearGradient id="clock-rim" x2="0" y2="1"><stop stop-color="#ffe2f5"/><stop offset=".5" stop-color="#ff65b2"/><stop offset="1" stop-color="#b82b88"/></linearGradient></defs>
@@ -69,11 +72,13 @@
         </svg>
         <span class="waiting-label">稍等片刻</span>
       </div>
+      <p id="mouth-prompt" class="mouth-prompt" hidden role="status">按住空格张嘴</p>
       <p class="feedback" id="feedback" hidden></p>
       <p class="loading-message" id="loading-message" role="status">正在加载桌面…</p>
     </section>
   </main>
-  <footer class="project-footer">鼠标拖动食品 · 空格张嘴 · Esc 暂停<span class="portrait-hint"> · 横屏操作更方便</span></footer>
+  <footer class="project-footer"><span id="interaction-hint">鼠标拖动食品 · 空格张嘴 · Esc 暂停</span><span class="portrait-hint"> · 横屏操作更方便</span></footer>
+  <video id="hand-video" class="camera-source" autoplay muted playsinline aria-hidden="true"></video>
   <p id="keyboard-help" class="sr-only">食品也支持键盘：按 Tab 选择，回车拿起，方向键移动，按住空格张嘴，回车放下，Esc 取消拿取。也可点击嘴巴切换开合。</p>
   <p id="search-timer-access" class="sr-only" role="timer" aria-label="剩余寻找时间" aria-live="off">01:00</p>
   <p id="status-description" class="sr-only"></p>

@@ -1,0 +1,27 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>本地手部模型检查</title>
+<style>body{font-family:system-ui;padding:30px;color:#5b2152;background:#fff2f7}button{padding:12px 20px}img{max-height:260px;display:block;margin:20px 0}</style>
+<h1>本地手部模型检查</h1><p>仅使用官方公开手部样例，不申请摄像头。</p>
+<button id="run">运行模型检查</button><p id="result" role="status">尚未运行</p>
+<img id="sample" src="./fixtures/thumb_up.jpg" alt="官方公开手部测试样例">
+<script>
+document.querySelector('#run').onclick=async()=>{
+ const status=document.querySelector('#result');status.textContent='正在加载本地模型…';
+ const worker=new Worker('../src/hand-worker.js');
+ const timeout=setTimeout(()=>{status.textContent='检查超时';worker.terminate();},25000);
+ worker.onerror=event=>{clearTimeout(timeout);status.textContent='失败：'+event.message;worker.terminate();};
+ worker.onmessage=async({data})=>{
+  if(data.type==='error'){clearTimeout(timeout);status.textContent='失败：'+data.message;worker.terminate();}
+  if(data.type==='ready'){
+   status.textContent='模型已就绪，正在检测公开样例…';
+   const image=document.querySelector('#sample');await image.decode();
+   const bitmap=await createImageBitmap(image);
+   worker.postMessage({type:'frame',bitmap,timestamp:performance.now(),aspect:image.naturalWidth/image.naturalHeight},[bitmap]);
+  }
+  if(data.type==='result'){
+   clearTimeout(timeout);status.textContent=data.points?.length===21?'通过：本地模型识别到一只手、21个关键点。':'失败：未识别到完整手部。';
+   worker.terminate();
+  }
+ };
+ worker.postMessage({type:'init'});
+};
+</script></html>

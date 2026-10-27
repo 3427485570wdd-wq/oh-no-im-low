@@ -9,6 +9,9 @@ const types = {
   ".css": "text/css; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
   ".svg": "image/svg+xml",
+  ".wasm": "application/wasm",
+  ".task": "application/octet-stream",
+  ".jpg": "image/jpeg",
   ".png": "image/png",
   ".json": "application/json; charset=utf-8",
   ".md": "text/plain; charset=utf-8"

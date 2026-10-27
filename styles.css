@@ -223,3 +223,26 @@ tbody td:last-child { font-weight: 800; white-space: nowrap; }
 
 /* The timer uses the same editable SVG rim, gradients and type as the fixed HUD. */
 .stage[data-phase="fading"] #search-time, .stage[data-phase="gameover"] #search-time { fill: #ff8db6; }
+
+/* Camera controls retain the established pink/purple UI language. */
+.header-controls { display:flex; align-items:center; gap:10px; }
+.mode-button { border:1px solid #e593d0; border-radius:99px; padding:6px 13px; color:#ffeaf4; background:linear-gradient(#9250a5,#58295c); cursor:pointer; font-size:12px; }
+.mode-button:disabled { opacity:.5; cursor:default; }
+.input-mode-label { color:#e9bbd6; font-size:12px; }
+.input-mode-label[data-ready="true"] { color:#b2e9c1; }
+.camera-source { position:fixed; width:1px; height:1px; left:-10px; top:-10px; opacity:0; pointer-events:none; }
+.hand-cursor { position:absolute; z-index:8; width:clamp(20px,3cqw,42px); height:auto; pointer-events:none; transform:translate(-12%,-8%); filter:drop-shadow(1px 2px 2px #56204f); }
+.hand-cursor svg { display:block; width:100%; }
+.hand-cursor.is-pinching svg path { fill:#ffbb49; }
+.food.hand-hover { filter:drop-shadow(0 0 5px #fff6ba); }
+.camera-status { padding:13px 16px; border:1px solid #ed9ac4; border-radius:16px; background:#ffe1ed; text-align:center; font-weight:700; line-height:1.6; min-height:54px; }
+.hand-instructions { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.hand-instructions p { padding:14px 7px; margin:0; border:1px solid #efb3cf; border-radius:15px; background:#fff7f5; text-align:center; }
+.hand-instructions strong,.hand-instructions span { display:block; }
+.hand-instructions span { font-size:12px; line-height:1.6; margin-top:7px; }
+.candy-button:disabled { cursor:default; opacity:.5; filter:saturate(.4); }
+@media(max-width:600px){.project-header{flex-wrap:wrap}.header-controls{gap:7px}.input-mode-label,.mode-button{font-size:10px}.mode-button{padding:5px 9px}.hand-instructions{gap:6px}.hand-instructions strong{font-size:13px}.hand-instructions span{font-size:11px}}
+
+.panel-emblem img { display:block; width:72px; height:72px; margin:0 auto; }
+
+.mouth-prompt { position:absolute; z-index:7; top:73%; left:50%; transform:translateX(-50%); margin:0; padding:.6% 1.8%; border:2px solid #ffd2ea; border-radius:99px; background:linear-gradient(#c653ac,#8e2b7e); color:#fff4cf; font-size:clamp(12px,1.7cqw,24px); font-weight:800; box-shadow:0 2px 0 #602052; pointer-events:none; }
